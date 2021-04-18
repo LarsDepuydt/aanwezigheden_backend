@@ -1,0 +1,11 @@
+---
+application:
+  name: "aanwezigheden-backend"
+  project: "aanwezigheden_backend"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-aanwezigheden-backend"
+  routes:
+  - application_name: "aanwezigheden-backend"
+    paths:
+    - "/*"
