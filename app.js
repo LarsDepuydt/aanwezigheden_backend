@@ -81,11 +81,14 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
+  .connect(
+    `mongodb+srv://${proces.env.DB_USER}:${proces.env.DB_PASSWORD}@aanwezigheden.5nglt.mongodb.net/${proces.env.DB_NAME}?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    }
+  )
   .then(() => {
     app.listen(5000);
   })
