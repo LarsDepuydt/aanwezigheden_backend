@@ -1,7 +1,7 @@
 ---
 application:
   name: "aanwezigheden-backend"
-  project: "aanwezigheden"
+  project: "aanwezigheden_backend"
   organization: "QoveryCommunity"
 routers:
 - name: "main-aanwezigheden-backend"
