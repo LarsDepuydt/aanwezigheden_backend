@@ -3,9 +3,13 @@ application:
   name: "aanwezigheden-backend"
   project: "aanwezigheden_backend"
   organization: "QoveryCommunity"
+databases:
+  - type: mongodb
+    version: "3.6"
+    name: aanwezigheden
 routers:
-- name: "main-aanwezigheden-backend"
-  routes:
-  - application_name: "aanwezigheden-backend"
-    paths:
-    - "/*"
+  - name: "main-aanwezigheden-backend"
+    routes:
+      - application_name: "aanwezigheden-backend"
+        paths:
+          - "/*"

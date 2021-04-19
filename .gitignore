@@ -3,6 +3,3 @@ package-lock.json
 nodemon.json
 credentials.txt
 .vscode
-
-Dockerfile
-.dockerignore
