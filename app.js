@@ -29,8 +29,15 @@ const app = express();
 app.use(helmet());
 
 // enables cors
+var whitelist = process.env.FRONTEND_URL;
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: "GET, POST, PATCH, DELETE",
   allowHeaders:
     "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept, Authorization",
