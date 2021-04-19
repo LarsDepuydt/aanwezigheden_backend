@@ -29,7 +29,7 @@ const app = express();
 app.use(helmet());
 
 // enables cors
-var whitelist = process.env.FRONTEND_URL;
+var whitelist = process.env.FRONTEND_URL.split(" ");
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
