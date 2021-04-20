@@ -14,7 +14,7 @@ const createUser = async (req, res, next) => {
     return next();
   }
   const { username, password, geboortejaar } = req.body;
-  const { vid } = req.params;
+  const { vid } = req.userData;
 
   let existingUser;
   try {
