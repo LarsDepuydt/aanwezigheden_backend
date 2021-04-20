@@ -14,6 +14,19 @@ const login = async (req, res, next) => {
   const { username, password } = req.body;
   const { vname } = req.params;
 
+  let vid;
+  try {
+    vid = await Vereniging.finOne({
+      name: vname,
+    });
+  } catch (err) {
+    const error = new HttpError(
+      "Failed while searching for vereniging id",
+      500
+    );
+    return next(error);
+  }
+
   let existingUser;
   try {
     existingUser = await User.findOne({
