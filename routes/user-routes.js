@@ -11,7 +11,7 @@ const updateAanwezigheid = require("../controllers/user/updateAanwezigheid");
 const router = express.Router();
 
 router.post(
-  "/:vid/signup",
+  "/:vname/signup",
   [
     check("username").notEmpty().trim().escape().isString(),
     check("password")
@@ -26,7 +26,7 @@ router.post(
 );
 
 router.patch(
-  "/:vid/login",
+  "/:vname/login",
   [
     check("username").notEmpty().trim().escape().isString(),
     check("password")

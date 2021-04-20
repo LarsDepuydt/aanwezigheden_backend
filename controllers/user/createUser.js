@@ -14,7 +14,20 @@ const createUser = async (req, res, next) => {
     return next();
   }
   const { username, password, geboortejaar } = req.body;
-  const { vid } = req.params;
+  const { vname } = req.params;
+
+  let vid;
+  try {
+    vid = await Vereniging.finOne({
+      name: vname,
+    });
+  } catch (err) {
+    const error = new HttpError(
+      "Failed while searching for vereniging id",
+      500
+    );
+    return next(error);
+  }
 
   let existingUser;
   try {

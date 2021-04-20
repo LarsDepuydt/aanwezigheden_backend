@@ -12,7 +12,7 @@ const login = async (req, res, next) => {
   }
 
   const { username, password } = req.body;
-  const { vid } = req.params;
+  const { vname } = req.params;
 
   let existingUser;
   try {
