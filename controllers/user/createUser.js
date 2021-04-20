@@ -18,7 +18,7 @@ const createUser = async (req, res, next) => {
 
   let vid;
   try {
-    vid = await Vereniging.finOne({
+    vid = await Vereniging.findOne({
       name: vname,
     });
   } catch (err) {
