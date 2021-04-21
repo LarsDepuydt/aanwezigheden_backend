@@ -15,11 +15,12 @@ const createUser = async (req, res, next) => {
   }
   const { username, password, geboortejaar } = req.body;
   const { vname } = req.params;
+  const vname_spaced = vname.replace("-", " ");
 
-  let vid;
+  let vereniging;
   try {
-    vid = await Vereniging.findOne({
-      name: vname,
+    vereniging = await Vereniging.findOne({
+      name: vname_spaced,
     });
   } catch (err) {
     const error = new HttpError(
@@ -28,6 +29,15 @@ const createUser = async (req, res, next) => {
     );
     return next(error);
   }
+
+  if (!vereniging) {
+    const error = new HttpError(
+      "Could not find vereniging for provided id.",
+      422
+    );
+    return next(error);
+  }
+  vid = vereniging._id;
 
   let existingUser;
   try {
@@ -66,22 +76,6 @@ const createUser = async (req, res, next) => {
     admin: false,
     onbepaald: [],
   });
-
-  let vereniging;
-  try {
-    vereniging = await Vereniging.findById(vid);
-  } catch (err) {
-    const error = new HttpError("Failed while searching vereniging", 500);
-    return next(error);
-  }
-
-  if (!vereniging) {
-    const error = new HttpError(
-      "Could not find vereniging for provided id.",
-      422
-    );
-    return next(error);
-  }
 
   let events;
   try {
