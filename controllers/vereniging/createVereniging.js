@@ -13,7 +13,6 @@ const createVereniging = async (req, res, next) => {
     return next();
   }
   const { name, username, password } = req.body;
-  console.log(name, username, password);
 
   let existingVereniging;
   try {
@@ -25,6 +24,7 @@ const createVereniging = async (req, res, next) => {
     );
     return next(error);
   }
+  console.log(existingVereniging);
   if (existingVereniging) {
     const error = new HttpError("Vereniging alreading exists", 422);
     return next(error);
