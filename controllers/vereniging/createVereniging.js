@@ -13,6 +13,7 @@ const createVereniging = async (req, res, next) => {
     return next();
   }
   const { name, username, password } = req.body;
+  console.log(name, username, password);
 
   let existingVereniging;
   try {
