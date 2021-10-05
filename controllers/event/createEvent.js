@@ -8,7 +8,7 @@ const User = require("../../models/user");
 const Vereniging = require("../../models/vereniging");
 
 const createEvent = async (req, res, next) => {
-  const { admin, vid } = req.userData;
+  const { admin, vid, userId } = req.userData;
   if (!admin) {
     const error = new HttpError("You are not allowed to create an event", 403);
     return next(error);
@@ -62,9 +62,20 @@ const createEvent = async (req, res, next) => {
 
   let users;
   try {
-    users = await User.find({ "user.vereniging": vid }, "onbepaald");
+    users = await User.find(
+      { "user.vereniging": vid, admin: false },
+      "onbepaald"
+    );
   } catch (err) {
     const error = new HttpError("Fetching all current users failed", 500);
+    return next(error);
+  }
+
+  let adminUser;
+  try {
+    adminUser = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError("Fetching admin user failed", 500);
     return next(error);
   }
 
@@ -76,6 +87,9 @@ const createEvent = async (req, res, next) => {
       createdEvent.onbepaald.push(user._id);
       await user.save({ session: sess });
     }
+    adminUser.aanwezig.push(createdEvent._id);
+    await adminUser.save({ session: sess });
+    createdEvent.aanwezig.push(userId);
     vereniging.events.push(createdEvent._id);
     await vereniging.save({ session: sess });
     await createdEvent.save({ session: sess });

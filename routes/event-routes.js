@@ -6,6 +6,7 @@ const getEvents = require("../controllers/event/getEvents");
 const getOneEvent = require("../controllers/event/getOneEvent");
 const updateEvent = require("../controllers/event/updateEvent");
 const deleteEvent = require("../controllers/event/deleteEvent");
+const getAanwezighedenEvent = require("../controllers/event/getAanwezighedenEvent");
 
 const router = express.Router();
 
@@ -21,6 +22,8 @@ router.post(
 router.get("/", getEvents);
 
 router.get("/:id", getOneEvent);
+
+router.get("/aanwezigheden/:id", getAanwezighedenEvent);
 
 router.patch(
   "/:id",
