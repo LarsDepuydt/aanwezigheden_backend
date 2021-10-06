@@ -32,7 +32,7 @@ app.use(helmet());
 const whitelist2 = process.env.FRONTEND_URL.split(" ");
 console.log(whitelist2);
 const whitelist = [
-  "https://aanwezigheden.vercel.app/",
+  "https://aanwezigheden.vercel.app",
   "https://aanwezigheden-larsdepuydt.vercel.app",
   "https://aanwezigheden-7ucgu0q0w-larsdepuydt.vercel.app",
   "https://aanwezigheden-git-master-larsdepuydt.vercel.app",
