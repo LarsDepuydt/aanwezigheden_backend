@@ -30,7 +30,6 @@ app.use(helmet());
 
 // enables cors
 const whitelist = process.env.FRONTEND_URL.split(" ");
-console.log(whitelist)
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
